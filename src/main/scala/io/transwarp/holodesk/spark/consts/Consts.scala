@@ -1,0 +1,11 @@
+package io.transwarp.holodesk.spark.consts
+
+object Consts {
+
+  val RANGE_MINVALUE = "MINVALUE"
+  val RANGE_MAXVALUE = "MAXVALUE"
+
+  val DEFAULTPARTITIONNAME = "__HIVE_DEFAULT_PARTITION__"
+  val DEFAULT_PARTITION_NAME_EMPTYSTR = "__HIVE_DEFAULT_PARTITION_EMPTYSTR__"
+
+}
