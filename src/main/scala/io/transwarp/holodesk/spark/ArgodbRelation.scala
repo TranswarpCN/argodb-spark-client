@@ -118,7 +118,6 @@ case class ArgodbRelation(sparkSession: SparkSession, options: Map[String, Strin
 
   override def schema: StructType = if (requestedSchema != null) requestedSchema else realSchema
 
-
   private var neededColumns: Array[Boolean] = _
 
   private def pruneColumns(requiredColumns: Array[String]): Unit = {
