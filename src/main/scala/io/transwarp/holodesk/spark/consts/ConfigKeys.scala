@@ -13,7 +13,4 @@ object ConfigKeys {
 
   val SINGLE_VALUE_PARTITION_COLUMN_NAMES = "single.value.partition.column.names"
 
-  val SPARK_ARGODB_LDAP_USER = "spark.argodb.ldap.user"
-  val SPARK_ARGODB_LDAP_PASSWD = "spark.argodb.ldap.password"
-
 }

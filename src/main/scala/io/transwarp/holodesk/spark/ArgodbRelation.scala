@@ -72,28 +72,18 @@ case class ArgodbRelation(sparkSession: SparkSession, options: Map[String, Strin
     }
   }
 
-  private val INCEPTOR_URL = JavaDbConnectionConf.getUrl
-  private val userName = if (StringUtils.equalsIgnoreCase(JavaDbConnectionConf.getAuth, "ldap")) {
-    options.getOrElse(ConfigKeys.SPARK_ARGODB_LDAP_USER, JavaDbConnectionConf.getLdapUser)
-  } else {
-    "hive"
-  }
-  private val passwd = if (StringUtils.equalsIgnoreCase(JavaDbConnectionConf.getAuth, "ldap")) {
-    options.getOrElse(ConfigKeys.SPARK_ARGODB_LDAP_PASSWD, JavaDbConnectionConf.getLdapPassword)
-  } else {
-    "123456"
-  }
-
   @transient private lazy val shivaClient: ShivaClient = TddmsEnv.getHoloShiva2Client
   @transient private lazy val holoClient: HoloClient = shivaClient.newHoloClient()
   @transient private lazy val shivaTable: Table = holoClient.openTable(tableName)
 
   private val holodeskTable = new JavaTable(shivaTable)
 
+  private val schemaKey = "schema"
+
   private lazy val realSchema: StructType = {
     // reader返回结果的schema信息,包含单值分区列
-    if (options.contains("schema")) {
-      val schemaStr = options("schema")
+    if (options.contains(schemaKey)) {
+      val schemaStr = options(schemaKey)
       StructType(
         schemaStr.split(",").map(col => StructField(col.split(":")(0),
           ConverterUtils.toDataType(col.split(":")(1))))
@@ -117,7 +107,6 @@ case class ArgodbRelation(sparkSession: SparkSession, options: Map[String, Strin
   private var requestedSchema: StructType = _
 
   override def schema: StructType = if (requestedSchema != null) requestedSchema else realSchema
-
 
   private var neededColumns: Array[Boolean] = _
 

@@ -86,11 +86,11 @@ class HolodeskCoreFastSerde(val colNum: Int, val primitiveType: Array[Int], val 
   })
 
   // Varchar2
-  sers += ((v: Any, idx:Int, offset:Int) => {
+  sers += ((v: Any, idx: Int, offset: Int) => {
     res(idx) = SerDeSupplementaryHelper.serialize(v.asInstanceOf[Text], HolodeskType.VARCHAR2)
-    if(res(idx) == null){
+    if (res(idx) == null) {
       0
-    }else{
+    } else {
       res(idx).length
     }
   })
@@ -133,12 +133,12 @@ class HolodeskCoreFastSerde(val colNum: Int, val primitiveType: Array[Int], val 
   })
 
   // PlaceHolder for type VOID
-  sers += ((v: Any, idx:Int, offset:Int) => {
+  sers += ((v: Any, idx: Int, offset: Int) => {
     0
   })
 
   // PlaceHolder for type WRDECIMAL
-  sers += ((v: Any, idx:Int, offset:Int) => {
+  sers += ((v: Any, idx: Int, offset: Int) => {
     val av = v.asInstanceOf[Array[Byte]]
     res(idx) = av
     if (res(idx) == null) {
@@ -149,11 +149,11 @@ class HolodeskCoreFastSerde(val colNum: Int, val primitiveType: Array[Int], val 
   })
 
   // VARCHAR
-  sers += ((v: Any, idx:Int, offset:Int) => {
+  sers += ((v: Any, idx: Int, offset: Int) => {
     res(idx) = SerDeSupplementaryHelper.serialize(v.asInstanceOf[Text], HolodeskType.VARCHAR)
-    if(res(idx) == null){
+    if (res(idx) == null) {
       0
-    }else{
+    } else {
       res(idx).length
     }
   })
@@ -352,6 +352,7 @@ object HolodeskCoreFastSerde {
       }
     }
   }
+
   // For filter generator usage
   // Don't recommand use this interface for table serde
   private type Ser = (Any) => Array[Byte]

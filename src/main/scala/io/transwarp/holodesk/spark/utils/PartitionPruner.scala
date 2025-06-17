@@ -38,7 +38,7 @@ object PartitionPruner extends Logging {
   // 范围分区过滤，范围分区范围都是左闭右开
   def pruneRangePartitions(partitionFields: Array[StructField],
                            partitions: util.Map[String, Array[JavaHolodeskRangeSectionColInfo]],
-                           filters: Array[Filter]):  util.Map[String, Array[JavaHolodeskRangeSectionColInfo]] = {
+                           filters: Array[Filter]): util.Map[String, Array[JavaHolodeskRangeSectionColInfo]] = {
 
     if (filters != null) {
       try {
