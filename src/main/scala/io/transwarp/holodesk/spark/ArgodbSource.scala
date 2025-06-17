@@ -26,7 +26,7 @@ object ArgodbSource {
 
   // 注册方法
   private def register(spark: SparkSession): Unit = {
-    //spark.conf.set("spark.sql.extensions", "io.transwarp.holodesk.spark.ArgodbSource")
+    spark.conf.set("spark.sql.extensions", "io.transwarp.holodesk.spark.ArgodbSource")
   }
 
 }
