@@ -78,10 +78,12 @@ case class ArgodbRelation(sparkSession: SparkSession, options: Map[String, Strin
 
   private val holodeskTable = new JavaTable(shivaTable)
 
+  private val schemaKey = "schema"
+
   private lazy val realSchema: StructType = {
     // reader返回结果的schema信息,包含单值分区列
-    if (options.contains("schema")) {
-      val schemaStr = options("schema")
+    if (options.contains(schemaKey)) {
+      val schemaStr = options(schemaKey)
       StructType(
         schemaStr.split(",").map(col => StructField(col.split(":")(0),
           ConverterUtils.toDataType(col.split(":")(1))))
